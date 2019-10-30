@@ -1,10 +1,34 @@
-<!DOCTYPE html><html lang=zh-CN><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,user-scalable=no"><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no, email=no"><title>uni-ydui</title><script>var UA = window.navigator.userAgent.toLowerCase();
+<!DOCTYPE html><html lang=zh-CN><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no, email=no"><title>uni-ydui</title><script>var UA = window.navigator.userAgent.toLowerCase();
 			var isAndroid = UA.indexOf('android') > 0;
 			var isIOS = /iphone|ipad|ipod|ios/.test(UA);
+			console.log(isIOS)
 			if (!(isAndroid || isIOS)) {
 				// 正式发布的时候使用，开发期间不启用。
 				// window.location.href = '/h5/pcguide.html';
 			}</script><script>document.addEventListener('DOMContentLoaded', function() {
 				document.documentElement.style.fontSize = document.documentElement.clientWidth / 20 + 'px'
-			})</script><link rel=stylesheet href=/uniydui/static/index.css></head><body><noscript><strong>Please enable JavaScript to continue.</strong></noscript><div id=app></div><script>/*BAIDU_STAT*/
-			var ROOT_URL = 'http://localhost:8080/center-pre-interface'</script><script src=/uniydui/static/js/chunk-vendors.9debc658.js></script><script src=/uniydui/static/js/index.894a55ac.js></script></body></html>
+			})
+
+			// IOS 10开始，meta 设置在 Safari 内无效解决方案
+			window.onload = function() {
+				// 阻止双击放大
+				var lastTouchEnd = 0;
+				document.addEventListener('touchstart', function(event) {
+					if (event.touches.length > 1) {
+						event.preventDefault();
+					}
+				});
+				document.addEventListener('touchend', function(event) {
+					var now = (new Date()).getTime();
+					if (now - lastTouchEnd <= 300) {
+						event.preventDefault();
+					}
+					lastTouchEnd = now;
+				}, false);
+
+				// 阻止双指放大
+				document.addEventListener('gesturestart', function(event) {
+					event.preventDefault();
+				});
+			}</script><link rel=stylesheet href=/uniydui/static/index.css></head><body><noscript><strong>Please enable JavaScript to continue.</strong></noscript><div id=app></div><script>/*BAIDU_STAT*/
+			// var ROOT_URL = 'http://localhost:8080/center-pre-interface'</script><script src=/uniydui/static/js/chunk-vendors.24070345.js></script><script src=/uniydui/static/js/index.1909f750.js></script></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang=zh-CN><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no, email=no"><title>uni-ydui</title><script>var UA = window.navigator.userAgent.toLowerCase();
+<!DOCTYPE html><html lang=zh-CN><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no, email=no"><title>uni-yd-demo</title><script>var UA = window.navigator.userAgent.toLowerCase();
 			var isAndroid = UA.indexOf('android') > 0;
 			var isIOS = /iphone|ipad|ipod|ios/.test(UA);
 			if (!(isAndroid || isIOS)) {
@@ -8,26 +8,33 @@
 				document.documentElement.style.fontSize = document.documentElement.clientWidth / 20 + 'px'
 			})
 
-			// IOS 10开始，meta 设置在 Safari 内无效解决方案
-			window.onload = function() {
-				// 阻止双击放大
-				var lastTouchEnd = 0;
-				document.addEventListener('touchstart', function(event) {
-					if (event.touches.length > 1) {
-						event.preventDefault();
-					}
-				});
-				document.addEventListener('touchend', function(event) {
-					var now = (new Date()).getTime();
-					if (now - lastTouchEnd <= 300) {
-						event.preventDefault();
-					}
-					lastTouchEnd = now;
-				}, false);
+			// 回退到登录界面不能再回退了
+			window.addEventListener("popstate", function(e) {
+				if (document.URL.split('#')[1] == '/') {
+					history.pushState(null, null, document.URL);
+				}
+			}, false);
 
-				// 阻止双指放大
-				document.addEventListener('gesturestart', function(event) {
-					event.preventDefault();
-				});
-			}</script><link rel=stylesheet href=/uniydui/static/index.css></head><body><noscript><strong>Please enable JavaScript to continue.</strong></noscript><div id=app></div><script>/*BAIDU_STAT*/
-			// var ROOT_URL = 'http://localhost:8080/center-pre-interface'</script><script src=/uniydui/static/js/chunk-vendors.0afb197f.js></script><script src=/uniydui/static/js/index.1684d257.js></script></body></html>
+			// IOS 10开始，meta 设置在 Safari 内无效解决方案
+			// window.onload = function() {
+			// 	// 阻止双击放大
+			// 	var lastTouchEnd = 0;
+			// 	document.addEventListener('touchstart', function(event) {
+			// 		if (event.touches.length > 1) {
+			// 			event.preventDefault();
+			// 		}
+			// 	});
+			// 	document.addEventListener('touchend', function(event) {
+			// 		var now = (new Date()).getTime();
+			// 		if (now - lastTouchEnd <= 300) {
+			// 			event.preventDefault();
+			// 		}
+			// 		lastTouchEnd = now;
+			// 	}, false);
+
+			// 	// 阻止双指放大
+			// 	document.addEventListener('gesturestart', function(event) {
+			// 		event.preventDefault();
+			// 	});
+			// }</script><link rel=stylesheet href=/static/index.css></head><body><noscript><strong>Please enable JavaScript to continue.</strong></noscript><div id=app></div><script src="https://webapi.amap.com/maps?v=1.4.15&key=8c244d41c436bd5e133bb8798c244e6d&plugin=AMap.Autocomplete,AMap.PlaceSearch"></script><script>/*BAIDU_STAT*/
+			// var ROOT_URL = 'http://localhost:8080/center-pre-interface'</script><script src=/static/js/chunk-vendors.2ee7820b.js></script><script src=/static/js/index.b4b739ce.js></script></body></html>
